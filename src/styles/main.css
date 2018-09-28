@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.App {
+  background-image: linear-gradient(45deg, black, white);
+}
+
+.title {
+  font-family: sans-serif;
+  padding: 15px 0px;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  height: 400px;
+  width: 325px;
+  border: 1px solid black;
+  border-radius: 15px;
+
+  font-size: 30px;
+  text-align: left;
+  word-wrap: normal;
+
+  display: flex;
+  padding: 30px 25px 0px 25px;
+}
+
+.black-card {
+  background-color: black;
+  color: white;
+}
+
+.white-card-container {
+  display: inline-flex;
+}
+
+.white-card {
+  margin: 20px 10px;
+  background-color: white;
+}
+
+.white-card:hover {
+  margin-top: 10px;
+  box-shadow: 3px 3px 8px rgb(158, 156, 156),
+              3px -3px 8px rgb(158, 156, 156),
+              -3px 3px 8px rgb(158, 156, 156),
+              -3px -3px 8px rgb(158, 156, 156);
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.button {
+  margin: 0px 10px;
+  font-size: 25px;
+  border-radius: 10px;
+}
