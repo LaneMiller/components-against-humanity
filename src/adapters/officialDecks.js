@@ -1,7 +1,7 @@
 export const officialDecks = {
   'Base':"Base Set",
   'BaseUK':"Base Set (UK Edition)",
-  'Box':"Box Expansion",
+  'Box':"Box Expansion (White Cards Only)",
   'CAHe1':"The First Expansion",
   'CAHe2':"The Second Expansion",
   'CAHe3':"The Third Expansion",

@@ -37,8 +37,9 @@ class Game extends Component {
     return allCards.filter(card => {
       const bools = decks.map(deck => deck === card.deck)
       if (bools.includes(true)) {
-        return true
+        return true;
       }
+      return false;
     });
   }
 
@@ -117,16 +118,16 @@ class Game extends Component {
     }
   }
 
-  renderCards = () => (
-    [
+  renderCards = () => {
+    return [
       <Card key={counter++} card={this.state.blackCard} color='black'/>,
       <WhiteCardsContainer key={counter++} cards={this.state.whiteCards}/>
     ]
-  )
+  }
 
   render() {
     const cards = this.state ? this.renderCards() : null;
-    console.log(this.props.decks);
+
     return (
       <div id='game'>
         <h1 className='title'>Cards Against Humanity</h1>

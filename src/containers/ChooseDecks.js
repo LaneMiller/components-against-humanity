@@ -54,8 +54,9 @@ class ChooseDecks extends Component {
   }
 
   render() {
-    console.log(this.state.selected);
+    // console.log(this.state.selected);
     const choices = this.renderDeckChoices()
+    
     return (
       <div className='choose-decks'>
         <h2 id='choose-decks-header'>

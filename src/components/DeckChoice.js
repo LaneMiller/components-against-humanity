@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 
 class DeckChoice extends Component {
   render() {
+    const toggle = () => {this.props.toggleSelected(this.props.deck)}
     return (
       <div className='deck-choice'>
         <input name={this.props.deck} type='checkbox' value={this.props.deck}
-          onClick={() => {this.props.toggleSelected(this.props.deck)}}
-          checked={this.props.checked}
+          onChange={toggle} checked={this.props.checked}
         />
-        <label for={this.props.deck}>{this.props.description}</label>
+        <label htmlFor={this.props.deck} onClick={toggle}>{this.props.description}</label>
       </div>
     )
   }
