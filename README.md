@@ -1,7 +1,6 @@
-#Components Against Humanity
-
-##A React Cards Against Humanity generator
-
+# Components Against Humanity
+### A React Cards Against Humanity generator
+***
 Goals:
  - Learn more about CSS, media queries, web sockets, etc.
  - Be able to choose CAH packs to pull from
