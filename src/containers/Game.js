@@ -10,6 +10,7 @@ class Game extends Component {
   state = {
     blackCard: {text: ''},
     whiteCards: [{text: ''}],
+    selectedCards: [],
     usedBlackCards: [],
     usedWhiteCards: [],
   }
@@ -63,7 +64,8 @@ class Game extends Component {
     }
 
     let whiteCards = [];
-    for (let i = 0; i < blackCard.pick; i++ ) {
+    const pick = blackCard.text === "Make a haiku." ? 3 : blackCard.pick
+    for (let i = 0; i < pick; i++ ) {
       let whiteCard = white[this.randomizeCard(white)]
 
       while (this.state.usedWhiteCards.includes(whiteCard)) {
@@ -82,6 +84,27 @@ class Game extends Component {
     return Math.floor(Math.random() * color.length);
   }
 
+  selectCard = (card) => {
+    const { selectedCards } = this.state;
+
+    if (selectedCards.find(obj => obj.text === card.text)) {
+      const filtered = selectedCards.filter(obj => obj.text !== card.text)
+      this.setState({
+        selectedCards: filtered,
+      })
+    }
+    else if (selectedCards.length < this.state.blackCard.pick) {
+      this.setState({
+        selectedCards: [...selectedCards, card]
+      })
+    }
+    else if (selectedCards.length === this.state.blackCard.pick) {
+      this.setState({
+        selectedCards: [...selectedCards.slice(1), card]
+      })
+    }
+  }
+
   nextTurn = () => {
     try {
       const { black, white } = this.state.deck;
@@ -90,6 +113,7 @@ class Game extends Component {
       this.setState({
         blackCard,
         whiteCards,
+        selectedCards: [],
         usedBlackCards: [...this.state.usedBlackCards, this.state.blackCard],
         usedWhiteCards: [...this.state.usedWhiteCards, ...this.state.whiteCards],
       });
@@ -104,12 +128,14 @@ class Game extends Component {
       const { blackCard, deck } = this.state;
       const whiteCards = [];
 
-      for (let i = 0; i < blackCard.pick; i++ ) {
+      const pick = blackCard.text === "Make a haiku." ? 3 : blackCard.pick
+      for (let i = 0; i < pick; i++ ) {
         whiteCards.push(deck.white[this.randomizeCard(deck.white)]);
       }
 
       this.setState({
         whiteCards: [...whiteCards],
+        selectedCards: [],
         usedWhiteCards: [...this.state.usedWhiteCards, ...this.state.whiteCards],
       });
     } catch (e) {
@@ -119,14 +145,28 @@ class Game extends Component {
   }
 
   renderCards = () => {
+    if (this.props.gameState === 'Black Cards Only') {
+      return <Card key={counter++} card={this.state.blackCard} color='black'/>
+    }
     return [
       <Card key={counter++} card={this.state.blackCard} color='black'/>,
-      <WhiteCardsContainer key={counter++} cards={this.state.whiteCards}/>
+      <WhiteCardsContainer key={counter++} cards={this.state.whiteCards} selectCard={this.selectCard} selectedCards={this.state.selectedCards}/>
+    ]
+  }
+
+  renderButtons = () => {
+    if (this.props.gameState === 'Black Cards Only') {
+      return <button onClick={this.nextTurn} className='button'>Next Turn</button>
+    }
+    return [
+      <button key='next' onClick={this.nextTurn} className='button'>Next Turn</button>,
+      <button key='new' onClick={this.drawWhiteCards} className='button'>New White Card(s)</button>
     ]
   }
 
   render() {
     const cards = this.state ? this.renderCards() : null;
+    const buttons = this.renderButtons();
 
     return (
       <div id='game'>
@@ -135,8 +175,7 @@ class Game extends Component {
           {cards}
         </div>
         <div className='buttons'>
-          <button onClick={this.nextTurn} className='button'>Next Turn</button>
-          <button onClick={this.drawWhiteCards} className='button'>New White Card(s)</button>
+          {buttons}
         </div>
       </div>
     )

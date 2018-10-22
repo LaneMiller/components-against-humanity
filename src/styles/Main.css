@@ -54,3 +54,18 @@ input[type=checkbox] {
   margin: 10px 25px;
   border-radius: 5px;
 }
+
+.choose-game {
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.choose-game button {
+  background-color: black;
+  font-size: 30px;
+  color: white;
+  margin: 20px;
+  border-radius: 5px;
+}

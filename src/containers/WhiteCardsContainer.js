@@ -3,9 +3,15 @@ import Card from '../components/Card';
 
 let counter = 1.2;
 class WhiteCardsContainer extends Component {
-  renderWhiteCards = () => (
-    this.props.cards.map(card => <Card key={counter++} card={card} color='white'/>)
-  )
+  renderWhiteCards = () => {
+    const { selectCard, selectedCards } = this.props;
+
+    return this.props.cards.map(card => {
+      const selected = selectedCards.find(obj => obj.text === card.text) ? true : false;
+
+      return <Card key={counter++} card={card} color='white' selectCard={selectCard} selected={selected}/>
+    })
+  }
 
   render() {
     const whiteCards = this.renderWhiteCards()
