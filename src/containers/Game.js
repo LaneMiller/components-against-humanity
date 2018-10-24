@@ -13,6 +13,7 @@ class Game extends Component {
     selectedCards: [],
     usedBlackCards: [],
     usedWhiteCards: [],
+    mulligans: 1,
   }
 
   componentDidMount() {
@@ -125,24 +126,29 @@ class Game extends Component {
   }
 
   drawWhiteCards = () => {
-    try {
-      const { blackCard, deck } = this.state;
-      const whiteCards = [];
+    if (this.state.mulligans > 0) {
+      try {
+        const { blackCard, deck } = this.state;
+        const whiteCards = [];
 
-      const pick = blackCard.text === "Make a haiku." ? 3 : blackCard.pick
-      for (let i = 0; i < pick; i++ ) {
-        whiteCards.push(deck.white[this.randomizeCard(deck.white)]);
+        while (whiteCards.length < 8) {
+          whiteCards.push(deck.white[this.randomizeCard(deck.white)]);
+        }
+
+        this.setState({
+          whiteCards: [...whiteCards],
+          selectedCards: [],
+          usedWhiteCards: [...this.state.usedWhiteCards, ...this.state.whiteCards],
+          mulligans: this.state.mulligans - 1,
+        });
+      } catch (e) {
+        const warn = this.state.warnings[this.randomizeCard(this.state.warnings)];
+        alert(warn);
       }
-
-      this.setState({
-        whiteCards: [...whiteCards],
-        selectedCards: [],
-        usedWhiteCards: [...this.state.usedWhiteCards, ...this.state.whiteCards],
-      });
-    } catch (e) {
-      const warn = this.state.warnings[this.randomizeCard(this.state.warnings)];
-      alert(warn);
+    } else {
+      alert("You're out of time-reversal cubes!")
     }
+
   }
 
   renderCards = () => {
