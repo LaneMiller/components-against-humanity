@@ -64,8 +64,8 @@ class Game extends Component {
     }
 
     let whiteCards = [];
-    const pick = blackCard.text === "Make a haiku." ? 3 : blackCard.pick
-    for (let i = 0; i < pick; i++ ) {
+    // for (let i = 0; i < 7; i++ ) {
+    while (whiteCards.length < 8) {
       let whiteCard = white[this.randomizeCard(white)]
 
       while (this.state.usedWhiteCards.includes(whiteCard)) {
@@ -85,7 +85,8 @@ class Game extends Component {
   }
 
   selectCard = (card) => {
-    const { selectedCards } = this.state;
+    const { selectedCards, blackCard } = this.state;
+    const pick = blackCard.text === "Make a haiku." ? 3 : blackCard.pick;
 
     if (selectedCards.find(obj => obj.text === card.text)) {
       const filtered = selectedCards.filter(obj => obj.text !== card.text)
@@ -93,12 +94,12 @@ class Game extends Component {
         selectedCards: filtered,
       })
     }
-    else if (selectedCards.length < this.state.blackCard.pick) {
+    else if (selectedCards.length < pick) {
       this.setState({
         selectedCards: [...selectedCards, card]
       })
     }
-    else if (selectedCards.length === this.state.blackCard.pick) {
+    else if (selectedCards.length === pick) {
       this.setState({
         selectedCards: [...selectedCards.slice(1), card]
       })
