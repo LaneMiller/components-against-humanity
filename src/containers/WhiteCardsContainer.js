@@ -9,7 +9,7 @@ class WhiteCardsContainer extends Component {
     return this.props.cards.map(card => {
       const selected = selectedCards.find(obj => obj.text === card.text) ? true : false;
 
-      return <Card key={counter++} card={card} color='white' selectCard={selectCard} selected={selected}/>
+      return <Card key={counter++} card={card} color='white' selectCard={selectCard} selected={selected} />
     })
   }
 

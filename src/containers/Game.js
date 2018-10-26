@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { fetchAdapter } from '../adapters/fetchAdapter';
-import '../styles/game.css';
+// import '../styles/game.css';
 
+import BlackCardGame from '../components/BlackCardGame';
 import Card from '../components/Card';
 import WhiteCardsContainer from './WhiteCardsContainer';
 
-let counter = 1.1;
 class Game extends Component {
   state = {
     blackCard: {text: ''},
@@ -128,7 +128,7 @@ class Game extends Component {
   drawWhiteCards = () => {
     if (this.state.mulligans > 0) {
       try {
-        const { blackCard, deck } = this.state;
+        const { deck } = this.state;
         const whiteCards = [];
 
         while (whiteCards.length < 8) {
@@ -153,11 +153,11 @@ class Game extends Component {
 
   renderCards = () => {
     if (this.props.gameState === 'Black Cards Only') {
-      return <Card key={counter++} card={this.state.blackCard} color='black'/>
+      return <BlackCardGame card={this.state.blackCard} />
     }
     return [
-      <Card key={counter++} card={this.state.blackCard} color='black'/>,
-      <WhiteCardsContainer key={counter++} cards={this.state.whiteCards} selectCard={this.selectCard} selectedCards={this.state.selectedCards}/>
+      <Card card={this.state.blackCard} color='black'/>,
+      <WhiteCardsContainer cards={this.state.whiteCards} selectCard={this.selectCard} selectedCards={this.state.selectedCards}/>
     ]
   }
 
@@ -187,6 +187,6 @@ class Game extends Component {
       </div>
     )
   }
-  }
+}
 
 export default Game;

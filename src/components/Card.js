@@ -8,7 +8,7 @@ class Card extends Component {
     const selected = this.props.selected ? 'selected' : null;
 
     return (
-      <div card={this.props.card} className={`card ${this.props.color}-card ${selected}`} onClick={handler}>
+      <div card={this.props.card} className={`card ${this.props.color}-card ${selected} ${this.props.mode}`} onClick={handler}>
         <p key={counter++}>{text}</p>
       </div>
     )

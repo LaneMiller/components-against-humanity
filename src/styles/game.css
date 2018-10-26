@@ -41,7 +41,7 @@
 }
 
 .white-card {
-  margin: 20px 10px;
+  margin: 20px 10px 0px 10px;
   background-color: white;
 }
 
@@ -70,7 +70,7 @@
 }
 
 .button {
-  margin: 0px 10px;
+  margin: 15px 10px;
   outline: none;
   font-size: 25px;
   border: 1px outset black;
